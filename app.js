@@ -87,6 +87,23 @@ passport.use(new InstagramStrategy({
   }
 ));
 
+//console.log(profile)
+// Use the FacebookStrategy within Passport.
+passport.use(new FacebookStrategy({
+    clientID: FACEBOOK_APP_ID,
+    clientSecret: FACEBOOK_APP_SECRET,
+    callbackURL: FACEBOOK_CALLBACK_URL
+  },
+  function(accessToken, refreshToken, profile, done) {
+    User.findOrCreate({
+      "displayName": profile.username 
+    }, function(err, user) {
+      if (err) { return done(err); }
+      done(null, user);
+    });
+  }
+));
+
 //Configures the Template engine
 app.engine('handlebars', handlebars({defaultLayout: 'layout'}));
 app.set('view engine', 'handlebars');
@@ -177,34 +194,6 @@ app.get('/auth/instagram/callback',
     res.redirect('/account');  //   /photos
   });
 
-app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
-});
-
-http.createServer(app).listen(app.get('port'), function() {
-    console.log('Express server listening on port ' + app.get('port'));
-});
-
-//console.log(profile)
-// Use the FacebookStrategy within Passport.
-passport.use(new FacebookStrategy({
-    clientID: FACEBOOK_APP_ID,
-    clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: FACEBOOK_CALLBACK_URL
-  },
-  function(accessToken, refreshToken, profile, done) {
-    User.findOrCreate({
-      "name": profile.username,
-      "id": profile.id,
-      "access_token": accessToken 
-    }, function(err, user) {
-      if (err) { return done(err); }
-      done(null, user);
-    });
-  }
-));
-
 // Redirect the user to Facebook for authentication.  When complete,
 // Facebook will redirect the user back to the application at
 //     /auth/facebook/callback
@@ -217,4 +206,17 @@ app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback', 
   passport.authenticate('facebook', { successRedirect: '/account',
                                       failureRedirect: '/login' }));
+
+
+
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
+http.createServer(app).listen(app.get('port'), function() {
+    console.log('Express server listening on port ' + app.get('port'));
+});
+
+
 
