@@ -13,6 +13,7 @@ var dotenv = require('dotenv');
 var Instagram = require('instagram-node-lib');
 var mongoose = require('mongoose');
 var app = express();
+var graph = require('fbgraph');
 
 //local dependencies
 var models = require('./models');
@@ -87,6 +88,7 @@ passport.use(new InstagramStrategy({
   }
 ));
 
+
 //console.log(profile)
 // Use the FacebookStrategy within Passport.
 passport.use(new FacebookStrategy({
@@ -95,11 +97,22 @@ passport.use(new FacebookStrategy({
     callbackURL: FACEBOOK_CALLBACK_URL
   },
   function(accessToken, refreshToken, profile, done) {
-    User.findOrCreate({
-      "displayName": profile.username 
-    }, function(err, user) {
-      if (err) { return done(err); }
-      done(null, user);
+    models.User.findOrCreate({
+      "name": profile.username,
+      "id": profile.id,
+      "access_token": accessToken 
+    }, function(err, user, created) {
+      // created will be true here
+      models.User.findOrCreate({}, function(err, user, created) {
+        // created will be false here
+        process.nextTick(function () {
+          // To keep the example simple, the user's Instagram profile is returned to
+          // represent the logged-in user.  In a typical application, you would want
+          // to associate the Instagram account with a user record in your database,
+          // and return that user instead.
+          return done(null, profile);
+        });
+      })
     });
   }
 ));
@@ -143,7 +156,6 @@ app.get('/login', function(req, res){
 });
 
 app.get('/account', ensureAuthenticated, function(req, res){
-  console.log('hi');
   res.render('account', {user: req.user});
 });
 
@@ -191,7 +203,7 @@ app.get('/auth/instagram',
 app.get('/auth/instagram/callback', 
   passport.authenticate('instagram', { failureRedirect: '/login'}),
   function(req, res) {
-    res.redirect('/account');  //   /photos
+    res.redirect('/photos');  //   /photos
   });
 
 // Redirect the user to Facebook for authentication.  When complete,

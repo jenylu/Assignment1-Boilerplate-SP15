@@ -2,3 +2,7 @@ hello account
 <p>ID: {{user.id}}</p>
 <p>Username: {{user.username}}</p>
 <p>Name:{{user.displayName}}</p>
+{{#each user.emails}}
+	<p>Emails: {{value}}</p>
+{{/each}}
+<p>Gender: {{user.gender}}</p>
