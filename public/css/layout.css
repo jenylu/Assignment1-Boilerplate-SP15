@@ -3,6 +3,14 @@ body {
   padding:0px;
   text-align:center;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #b0c4de;
+  background-image: url("home_wallpaper.png");
+  background-repeat: no-repeat;
+  background-position: right top;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 a {
@@ -10,8 +18,36 @@ a {
 }
 
 p.par0 {
-    color: blue;
-    font-size: 2.000em;
+    font-family: Tahoma, Geneva, sans-serif;
+    margin:20px 0px;
+    background-color: rgba(181, 218, 255, 0.5);
+    color:#000059;
+    font-size: 2.250em;
+}
+p.par1 {
+    font-family: Tahoma, Geneva, sans-serif;
+    background-color: rgba(203, 229, 255, 0.5);
+    color:#000059;
+    font-size: 1.100em;
+}
+p.par2 {
+    font-family: Tahoma, Geneva, sans-serif;
+    background-color: rgba(219, 237, 255, 0.5);
+    color:#000059;
+    font-size: 1.100em;
+}
+p.par3 {
+    font-family: Tahoma, Geneva, sans-serif;
+    background-color: rgba(230, 242, 255, 0.5);
+    color:#000059;
+    font-size: 1.100em;
+}
+p.par4 {
+    font-family: Tahoma, Geneva, sans-serif;
+    margin:20px 0px;
+    background-color: rgba(238, 246, 255, 0.5);
+    color:#000059;
+    font-size: 1.100em;
 }
 
 .instaButton {
