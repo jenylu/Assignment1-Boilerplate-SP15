@@ -126,6 +126,7 @@ app.get('/login', function(req, res){
 });
 
 app.get('/account', ensureAuthenticated, function(req, res){
+  console.log('hi');
   res.render('account', {user: req.user});
 });
 
@@ -153,7 +154,6 @@ app.get('/photos', ensureAuthenticated, function(req, res){
   });
 });
 
-
 // GET /auth/instagram
 //   Use passport.authenticate() as route middleware to authenticate the
 //   request.  The first step in Instagram authentication will involve
@@ -174,7 +174,7 @@ app.get('/auth/instagram',
 app.get('/auth/instagram/callback', 
   passport.authenticate('instagram', { failureRedirect: '/login'}),
   function(req, res) {
-    res.redirect('/account');
+    res.redirect('/account');  //   /photos
   });
 
 app.get('/logout', function(req, res){
@@ -186,6 +186,7 @@ http.createServer(app).listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));
 });
 
+//console.log(profile)
 // Use the FacebookStrategy within Passport.
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
@@ -214,6 +215,6 @@ app.get('/auth/facebook', passport.authenticate('facebook'));
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
 app.get('/auth/facebook/callback', 
-  passport.authenticate('facebook', { successRedirect: '/',
+  passport.authenticate('facebook', { successRedirect: '/account',
                                       failureRedirect: '/login' }));
 
