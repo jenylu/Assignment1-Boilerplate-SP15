@@ -14,7 +14,7 @@ a {
   color: #00B7FF;
 }
 
-.isnta{
+.insta{
 	height: 500px;
 }
 
@@ -60,6 +60,129 @@ p.par4 {
     padding:0px;
     text-align:center;
 }
+
+h1.par5 {
+    font-family: Tahoma, Geneva, sans-serif;
+    margin:0.500em 0.000em;
+    padding:0px;
+    text-indent: 1.000em;
+    text-align:left;
+    background-color: rgba(181, 218, 255, 0.5);
+    color:#000059;
+    font-size: 2.450em;
+}
+
+h1.par6 {
+    font-family: Tahoma, Geneva, sans-serif;
+    margin:0.500em 0.000em;
+    padding:0px;
+    text-indent: 1.000em;
+    text-align:left;
+    background-color: rgba(181, 218, 255, 0.5);
+    color:#000059;
+    font-size: 2.450em;
+}
+
+h1.par7 {
+    font-family: Tahoma, Geneva, sans-serif;
+    margin: 0.000em 0.000em;
+    padding: 0px;
+    text-indent: 2.000em;
+    text-align: left;
+    background-color: rgba(219, 237, 255, 0.5);
+    color: #000059;
+    font-size: 1.250em;
+}
+
+p.accountUni {
+    font-family: Tahoma, Geneva, sans-serif;
+    margin:0.000em 0.000em;
+    padding:0px;
+    text-indent: 2.500em;
+    text-align:left;
+    background-color: rgba(181, 218, 255, 0.75);
+    color:#000059;
+    font-size: 1.100em;
+    padding:0px;
+}
+
+p.accountUni0 {
+    font-family: Tahoma, Geneva, sans-serif;
+    margin:0.000em 0.000em;
+    padding:0px;
+    text-indent: 2.500em;
+    text-align:left;
+    background-color: rgba(0, 0, 153, 0.5);
+    color:#F0F0F5;
+    font-size: 1.100em;
+    padding:0px;
+}
+
+p.fbInfo {
+    font-family: Tahoma, Geneva, sans-serif;
+    margin:0.000em 0.000em;
+    padding:0px;
+    text-indent: 0.000em;
+    text-align:left;
+    background-color: rgba(51, 51, 255, 0.75);
+    color:#F0F0F5;
+    font-size: 1.100em;
+    padding:0px;
+    padding-right:0.500em;
+    padding-left:0.500em;
+    padding-top:0.200em;
+    padding-bottom:0.125em;
+}
+
+p.fbInfo0 {
+    font-family: Tahoma, Geneva, sans-serif;
+    margin:0.000em 0.000em;
+    padding:0px;
+    text-indent: 2.500em;
+    text-align:left;
+    font-size: 1.100em;
+    padding:0px;
+    padding-bottom:1.000em;
+}
+
+p.imageText {
+    font-family: Tahoma, Geneva, sans-serif;
+    margin:0.000em 0.000em;
+    padding:0px;
+    text-indent: 0.000em;
+    text-align:left;
+    background-color: rgba(51, 51, 255, 0.75);
+    color:#F0F0F5;
+    font-size: 1.100em;
+    padding:0px;
+    padding-right:0.500em;
+    padding-left:0.500em;
+    padding-top:0.250em;
+    padding-bottom:0.250em;
+}
+
+h3.header0 {
+    font-family: Tahoma, Geneva, sans-serif;
+    margin:0.500em 0.000em;
+    padding:0px;
+    text-indent: 1.000em;
+    text-align:left;
+    background-color: rgba(181, 218, 255, 0.5);
+    color:#000059;
+    font-size: 2.450em;
+}
+
+h3.header1 {
+    font-family: Tahoma, Geneva, sans-serif;
+    margin:0.500em 0.000em;
+    padding:0px;
+    text-indent: 1.000em;
+    text-align:left;
+    background-color: rgba(181, 218, 255, 0.5);
+    color:#000059;
+    font-size: 2.450em;
+}
+
 
 .instaButton {
 	-moz-box-shadow:inset 0px 1px 0px 0px #bbdaf7;

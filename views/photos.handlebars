@@ -1,11 +1,13 @@
 <h1 class="par5">Instagram Feed</h1>
+<h1 class="par7">Recent Feed:</h1>
+<p class="fbInfo0"> </p>
 <div class="container-fluid">
 	<div class="row">
 	    {{#each photos}}
 	    <div class="col-sm-3">
 	    	<div class="insta">
 		      <img src="{{url}}" class="img-responsive" class="img hashtag-img">
-		      <p>{{caption}}</p>
+		      <p class="imageText">{{caption}}</p>
 	  		</div>
 	      </div>
 	    {{/each}}  
