@@ -1,8 +1,15 @@
-hello account
-<p>ID: {{user.id}}</p>
-<p>Username: {{user.username}}</p>
-<p>Name:{{user.displayName}}</p>
-{{#each user.emails}}
-	<p>Emails: {{value}}</p>
-{{/each}}
-<p>Gender: {{user.gender}}</p>
+{{#if instagramAcct}}
+	<h3>Welcome to your Instagram Account</h3>
+	<p>ID: {{instagramAcct.user.id}}</p>
+	<p>Username: {{instagramAcct.user.username}}</p>
+	<p>Name:{{instagramAcct.user.displayName}}</p>
+	<p><a href="/photos" class="instaButton">Continue to your Instagram Photos</a></p>
+{{/if}}
+
+{{#if fbAcct}}
+	<h3>Welcome to your Facebook Account</h3>
+	<p>ID: {{fbAcct.user.id}}</p>
+	<p>Name:{{fbAcct.user.displayName}}</p>
+	<p>Gender: {{fbAcct.user.gender}}</p>
+	<p><a href="/facebookInfo" class="fbButton">Continue to your Facebook Photos</a></p>
+{{/if}}

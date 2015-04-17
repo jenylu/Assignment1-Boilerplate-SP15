@@ -15,7 +15,6 @@ var mongoose = require('mongoose');
 var app = express();
 var graph = require('fbgraph');
 
-var _ = require('underscore');
 var moment = require('moment');
 
 //local dependencies
@@ -163,8 +162,17 @@ app.get('/login', function(req, res){
 });
 
 app.get('/account', ensureAuthenticated, function(req, res){
-  res.render('account', {user: req.user}); 
+  var temp={};
+  temp.user = req.user;
+  if(req.user.provider === 'instagram') {
+    res.render('account', { instagramAcct: temp });
+  }
+  else if(req.user.provider === 'facebook') {
+    res.render('account', { fbAcct: temp });
+  }
 });
+
+//res.render('account', {user: req.user});
 
 //displays user's facebook feed, caption, and date
 app.get('/facebookInfo', ensureAuthenticated, function(req, res){
@@ -173,7 +181,7 @@ app.get('/facebookInfo', ensureAuthenticated, function(req, res){
     if (err) return handleError(err);
     if (user) {
       graph.get('/' + user.id + '/feed', function(err, response){
-        console.log(response);
+        //console.log(response);
         var feed = response.data.map(function(item){
           var tempJSON = {};
           tempJSON.caption = item.story;
@@ -243,7 +251,7 @@ app.get('/auth/instagram',
 app.get('/auth/instagram/callback', 
   passport.authenticate('instagram', { failureRedirect: '/login'}),
   function(req, res) {
-    res.redirect('/photos');  //   /photos
+    res.redirect('/account');  
   });
 
 // Redirect the user to Facebook for authentication.  When complete,
@@ -259,7 +267,7 @@ app.get('/auth/facebook',
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
 app.get('/auth/facebook/callback', 
-  passport.authenticate('facebook', { successRedirect: '/facebookInfo',
+  passport.authenticate('facebook', { successRedirect: '/account',
                                       failureRedirect: '/login' }));
 
 
