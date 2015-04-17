@@ -1,6 +1,16 @@
 <p class="par5">Instagram Feed</p>
 
-{{#each photos}}
-  <img src="{{url}}" class="img-responsive" class="img hashtag-img">
-  <p>{{caption}}</p>
-{{/each}}
+<div class="row">
+  <div class="col-sm-3">
+    {{#each photos}}
+      <img src="{{url}}" class="img-responsive" class="img hashtag-img">
+      <p>{{caption}}</p>
+    {{/each}}
+  </div>
+<div class="col-sm-3">
+    {{#each photos}}
+      <img src="{{url}}" class="img-responsive" class="img hashtag-img">
+      <p>{{caption}}</p>
+    {{/each}}
+  </div>
+</div>
