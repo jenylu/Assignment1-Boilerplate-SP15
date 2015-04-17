@@ -15,6 +15,9 @@ var mongoose = require('mongoose');
 var app = express();
 var graph = require('fbgraph');
 
+var _ = require('underscore');
+var moment = require('moment');
+
 //local dependencies
 var models = require('./models');
 
@@ -102,10 +105,14 @@ passport.use(new FacebookStrategy({
       "id": profile.id,
       "access_token": accessToken 
     }, function(err, user, created) {
+      
       // created will be true here
       models.User.findOrCreate({}, function(err, user, created) {
         // created will be false here
         process.nextTick(function () {
+          graph.setAccessToken(accessToken);
+          graph.setAppSecret(FACEBOOK_APP_SECRET);
+
           // To keep the example simple, the user's Instagram profile is returned to
           // represent the logged-in user.  In a typical application, you would want
           // to associate the Instagram account with a user record in your database,
@@ -156,7 +163,39 @@ app.get('/login', function(req, res){
 });
 
 app.get('/account', ensureAuthenticated, function(req, res){
-  res.render('account', {user: req.user});
+  res.render('account', {user: req.user}); 
+});
+
+//displays user's facebook feed, caption, and date
+app.get('/facebookInfo', ensureAuthenticated, function(req, res){
+  var query  = models.User.where({ id: req.user.id });
+  query.findOne(function (err, user) {
+    if (err) return handleError(err);
+    if (user) {
+      graph.get('/' + user.id + '/feed', function(err, response){
+        console.log(response);
+        var feed = response.data.map(function(item){
+          var tempJSON = {};
+          tempJSON.caption = item.story;
+          tempJSON.photo = item.picture;
+          tempJSON.message = item.message;
+          tempJSON.time = moment(item.created_time).format('MMMM Do YYYY');
+          return tempJSON;
+        })
+        res.render('facebookInfo', {fbFeed: feed});
+      /*graph.get('/' + user.id + '/photos?type=uploaded', function(err, response){
+          console.log(response);
+          response.paging.limit = 80;
+          var images = response.data.map(function(item){
+            var tempJSON = {};
+            tempJSON.link = item.source;
+            tempJSON.time = moment(item.created_time).format('MMMM Do YYYY');
+            return tempJSON;
+          })
+          res.render('facebookInfo', {fbImage: images});  */
+       }); 
+    }
+  });
 });
 
 app.get('/photos', ensureAuthenticated, function(req, res){
@@ -210,16 +249,18 @@ app.get('/auth/instagram/callback',
 // Redirect the user to Facebook for authentication.  When complete,
 // Facebook will redirect the user back to the application at
 //     /auth/facebook/callback
-app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook',
+  passport.authenticate('facebook', { scope: ['user_likes', 'user_photos', 'read_stream'] }),
+  function(req, res) {});
+
 
 // Facebook will redirect the user to this URL after approval.  Finish the
 // authentication process by attempting to obtain an access token.  If
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
 app.get('/auth/facebook/callback', 
-  passport.authenticate('facebook', { successRedirect: '/account',
+  passport.authenticate('facebook', { successRedirect: '/facebookInfo',
                                       failureRedirect: '/login' }));
-
 
 
 app.get('/logout', function(req, res){
