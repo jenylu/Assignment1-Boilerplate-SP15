@@ -1,5 +1,5 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px Verdana, "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: #b0c4de;
   background-image: url("home_wallpaper.png");
   background-repeat: no-repeat;
@@ -123,10 +123,9 @@ p.fbInfo {
     margin:0.000em 0.000em;
     padding:0px;
     text-indent: 0.000em;
-    text-align:left;
-    background-color: rgba(51, 51, 255, 0.75);
+    text-align:left;   
     color:#F0F0F5;
-    font-size: 1.100em;
+    font-size: 1.5em;
     padding:0px;
     padding-right:0.500em;
     padding-left:0.500em;
@@ -151,9 +150,8 @@ p.imageText {
     padding:0px;
     text-indent: 0.000em;
     text-align:left;
-    background-color: rgba(51, 51, 255, 0.75);
     color:#F0F0F5;
-    font-size: 1.100em;
+    font-size: 1.5em;
     padding:0px;
     padding-right:0.500em;
     padding-left:0.500em;
@@ -264,4 +262,32 @@ h3.header1 {
 .fbButton:active {
 	position:relative;
 	top:1px;
+}
+
+.blocks{
+    width: 350px;
+    height: 250px;
+    display: inline-block;
+    padding: 10px;
+    margin: 0px 0px 2.5% 2.5%;
+    background-color: rgba(51, 51, 255, 0.75);
+    border: 1px solid #DDD;
+    font-size: 1rem;
+    vertical-align: top;
+    box-shadow: 0px 0px 5px #DDD;
+    box-sizing: border-box;
+}
+
+.blocksInsta{
+    height: 500px;
+    width: 300px;
+    display: inline-block;
+    padding: 10px;
+    margin: 0px 0px 2.5% 2.5%;
+    background-color: rgba(51, 51, 255, 0.75);
+    border: 1px solid #DDD;
+    font-size: 1rem;
+    vertical-align: top;
+    box-shadow: 0px 0px 5px #DDD;
+    box-sizing: border-box;
 }

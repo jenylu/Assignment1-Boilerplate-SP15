@@ -90,8 +90,23 @@ passport.use(new InstagramStrategy({
   }
 ));
 
+/*
+if(!user){
+  newUser = new models.User({...});
+  newUser.save(function(err){
+  if(err){
+  console.log
+  else
+  console.log
+  }
+  })
+}
+else{
+  save user
+}
+*/
 
-//console.log(profile)
+
 // Use the FacebookStrategy within Passport.
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
@@ -147,6 +162,20 @@ app.set('port', process.env.PORT || 3000);
 //   login page.
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { 
+    return next(); 
+  }
+  res.redirect('/login');
+}
+
+function ensureAuthenticatedFB(req, res, next) {
+  if (req.isAuthenticated() && !!req.user.ig_id) { 
+    return next(); 
+  }
+  res.redirect('/login');
+}
+
+function ensureAuthenticatedIG(req, res, next) {
+  if (req.isAuthenticated() &&!!req.user.fb_id) { 
     return next(); 
   }
   res.redirect('/login');
@@ -281,6 +310,3 @@ app.get('/logout', function(req, res){
 http.createServer(app).listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));
 });
-
-
-
