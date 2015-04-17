@@ -1,14 +1,13 @@
-<div class="container-fluid">
-  <div class="row">
-    <p><p>
-    {{#each fbFeed}}
-      <div class="col-md-4" >
-        <img src="{{photo}}" class="img-responsive" class="img hashtag-img">
-        <p class="fbInfo"> {{caption}} </p>
-        <p class="fbInfo"> {{message}} </p>
-        <p class="fbInfo"> <b>{{time}} </b></p>
-      </div>
-    {{/each}} 
-  </div>
-</div>
-</div>
+<p class="par6">Facebook Feed</p>
+
+ <!-- {{#each fbImage}}
+  <img src="{{link}}" class="img-responsive" class="img hashtag-img">
+  <p> {{time}} </p>
+{{/each}}  -->
+
+ {{#each fbFeed}}
+  <img src="{{photo}}" class="img-responsive" class="img hashtag-img">
+  <p> {{caption}} </p>
+  <p> {{message}} </p>
+  <p> {{time}} </p>
+{{/each}} 
